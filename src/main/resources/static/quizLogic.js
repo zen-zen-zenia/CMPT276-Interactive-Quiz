@@ -59,7 +59,7 @@ const nextButton = document.getElementById('next');
 const backButton = document.getElementById('back');
 const retryButton = document.getElementById('retry');
 const submitButton = document.getElementById('submit');
-const showAnswerButton = document.getElementById('showAnswer');
+const showAnswerButton = document.getElementById('showAns');
 
 let currentQuestion = 0;
 let score = 0;
