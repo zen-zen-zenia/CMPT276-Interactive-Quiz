@@ -53,6 +53,7 @@ const quizData = [
   },
 ];
 
+//variables to help me access the associated HTML elements
 const quizContainer = document.getElementById('quiz');
 const resultContainer = document.getElementById('result');
 const nextButton = document.getElementById('next');
@@ -61,10 +62,12 @@ const retryButton = document.getElementById('retry');
 const submitButton = document.getElementById('submit');
 const showAnswerButton = document.getElementById('showAns');
 
+//Variables to track current question index, user score, and incorrect answers
 let currentQuestion = 0;
 let score = 0;
 let incorrectAnswers = [];
 
+//function to randomize the order of the question choices
 function shuffleArray(array) { 
   //CITE: Referenced the website for how to Shuffle an array
   //https://stackoverflow.com/questions/7070054/javascript-shuffle-html-list-element-order
@@ -74,6 +77,7 @@ function shuffleArray(array) {
   }
 }
 
+//fucntion to display a quiz question and it's potential answers
 function displayQuestion() {
   //CITE: I used this link to help me write this function
   //https://stackoverflow.com/questions/75196774/how-can-i-sequentially-select-and-display-questions-from-an-array-of-questions-u
@@ -119,7 +123,8 @@ function displayQuestion() {
   backButton.style.display = currentQuestion === 0 ? 'none' : 'inline-block';
 }
 
-
+//highlights the correct answer after a choice has been made. 
+//it will highlight the user's answer in red if they didn't get the question right
 function highlightCorrectAnswer() {
   const correctAnswer = quizData[currentQuestion].answer;
   const choices = document.querySelectorAll('input[name="quiz"]');
@@ -139,6 +144,9 @@ function highlightCorrectAnswer() {
   });
 }
 
+//function to check if teh user chose the right answer
+//if they did not, it will remember the question they got wrong, saving the 
+//following to be used later to when they click showans: current Q, user's ans, correct ans
 function checkAnswer() {
   const selectedChoice = document.querySelector('input[name="quiz"]:checked');
   if (selectedChoice) {
@@ -168,6 +176,7 @@ function checkAnswer() {
   }
 }
 
+//function that shows the user's final resutls
 function displayResult() {
   quizContainer.style.display = 'none';
   nextButton.style.display = 'none';
@@ -178,6 +187,7 @@ function displayResult() {
   showAnswerButton.style.display = 'inline-block';
 }
 
+//function to restart the quiz 
 function retryQuiz() {
   currentQuestion = 0;
   score = 0;
@@ -193,6 +203,8 @@ function retryQuiz() {
 }
 
 //CITE: I used chatGPT for help writing this function 
+//function to show the correct ans when the user clicks on the show answers button
+//uses the data saved from checkanswer function
 function showAnswer() {
   quizContainer.style.display = 'none';
   submitButton.style.display = 'none';
@@ -217,12 +229,13 @@ function showAnswer() {
   `;
 }
 
-
+//function to submit the quiz
 function submitQuiz() {
   checkAnswer(); 
   displayResult();
 }
 
+//event listeners for when the associated buttons get clicked
 nextButton.addEventListener('click', checkAnswer);
 retryButton.addEventListener('click', retryQuiz);
 submitButton.addEventListener('click', submitQuiz);
@@ -240,4 +253,5 @@ nextButton.style.display = 'none';
 backButton.style.display = 'none';
 retryButton.style.display = 'none';
 
+//show the first question when hte page loads
 displayQuestion();
