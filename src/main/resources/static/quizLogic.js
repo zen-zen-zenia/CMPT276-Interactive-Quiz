@@ -149,7 +149,7 @@ function checkAnswer() {
       score++;
     } 
     else { 
-      incorrectAnswers.push({
+      incorrectAnswers.push({ //gives me the data I need for the showAns button later
         question: quizData[currentQuestion].question,
         incorrectAnswer: answer,
         correctAnswer: correctAnswer,
